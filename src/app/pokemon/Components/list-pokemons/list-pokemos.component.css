@@ -1,0 +1,27 @@
+table.blueTable {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    border: 1px solid rgb(180, 178, 178);
+}
+
+table.blueTable td,
+table.blueTable th {
+    border: 1px solid rgb(180, 178, 178);
+    padding: 15px 15px;
+}
+
+table.blueTable thead th {
+    font-weight: bold;
+    text-align: center;
+}
+
+table.blueTable thead td {
+    text-align: center;
+}
+
+span {
+    color: rgb(96, 19, 219);
+    padding-left: 10%;
+    padding-right: 10%;
+}

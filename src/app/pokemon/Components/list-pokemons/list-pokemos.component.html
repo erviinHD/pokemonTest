@@ -1,0 +1,36 @@
+<nav>
+    <h1>Listado Pokemon</h1>
+</nav>
+<table class="blueTable">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Ataque</th>
+            <th scope="col">Defensa</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pokemon of pokemons">
+            <td>{{pokemon.name}}</td>
+            <td>
+                <div class="center">
+                    <img [src]="pokemon.image" alt="image pokemon" height="25">
+                </div>
+            </td>
+            <td>{{pokemon.attack}}</td>
+            <td>{{pokemon.defense}}</td>
+            <td>
+                <div class="center">
+                    <span class="material-icons">
+                        drive_file_rename_outline
+                    </span>
+                    <span class="material-icons">
+                        delete_forever
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

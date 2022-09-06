@@ -4,6 +4,7 @@ import { Pokemon } from '../../Interfaces/pokemon';
 import { Subscription } from 'rxjs';
 
 import { PokemonService } from '../../services/pokemon.service';
+import { AlertsService } from '../../Services/alerts.service';
 
 @Component({
   selector: 'app-list-pokemos',
@@ -17,7 +18,7 @@ export class ListPokemosComponent implements OnInit {
 
   pokemonNameSearch: string = ''
 
-  constructor(private _pokemon: PokemonService) { }
+  constructor(private _pokemon: PokemonService, private _alerts: AlertsService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -29,17 +30,33 @@ export class ListPokemosComponent implements OnInit {
 
   getPokemos(): Promise<Pokemon[]> {
     return new Promise((resolve, reject) => {
-      const subsPokemon = this._pokemon
+      const subPokemonGet = this._pokemon
         .getPokemons()
         .subscribe((resp) => {
-          resp.map((res) => {
-            if (res.image.includes('data:')) {
-              res.image = '/assets/images/no-image.jpg'
-            }
-          })
           resolve(resp);
         });
-      this.subscriptions.push(subsPokemon);
+      this.subscriptions.push(subPokemonGet);
+    })
+  }
+
+  deletePokemon(pokemon: Pokemon) {
+    const alert = this._alerts.sweeAletDeleteGeneric(
+      'El Pokemón: '.concat(pokemon.name)
+    );
+
+    alert.then((result) => {
+      if (result.value) {
+        const subPokemonDelete = this._pokemon
+          .deletePokemon(pokemon.id.toString())
+          .subscribe({
+            next: () => {
+              this.loadData()
+            },
+            error: (err) => {
+            }
+          });
+        this.subscriptions.push(subPokemonDelete);
+      }
     })
   }
 

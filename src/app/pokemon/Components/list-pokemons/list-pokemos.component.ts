@@ -15,6 +15,8 @@ export class ListPokemosComponent implements OnInit {
   pokemons: Pokemon[] = []
   subscriptions: Subscription[] = [];
 
+  pokemonNameSearch: string = ''
+
   constructor(private _pokemon: PokemonService) { }
 
   ngOnInit(): void {

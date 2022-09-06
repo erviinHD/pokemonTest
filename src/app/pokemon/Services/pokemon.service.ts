@@ -16,4 +16,6 @@ export class PokemonService {
   getPokemons(): Observable<Pokemon[]> {
     return this.http.get<Pokemon[]>(`${this.URL_API}/?idAuthor=1`);
   }
+
+
 }

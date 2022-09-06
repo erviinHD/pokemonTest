@@ -5,13 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from '../Components/components.module';
 
 
-
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
+    ComponentsModule,
     HttpClientModule,
-    ComponentsModule
+    
   ]
 })
 export class PagesModule { }

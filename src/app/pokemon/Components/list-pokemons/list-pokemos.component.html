@@ -1,7 +1,12 @@
 <nav>
-    <h1>Listado Pokemon</h1>
+    <h1>Listado de Pokemon</h1>
 </nav>
-<table class="blueTable">
+
+<section>
+    <input class="inputSerch" type="search" placeholder="Buscar" [(ngModel)]="pokemonNameSearch">
+</section>
+
+<table class="indexTable">
     <thead>
         <tr>
             <th scope="col">Nombre</th>
@@ -12,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let pokemon of pokemons">
+        <tr *ngFor="let pokemon of pokemons |searchPokemon:pokemonNameSearch">
             <td>{{pokemon.name}}</td>
             <td>
                 <div class="center">

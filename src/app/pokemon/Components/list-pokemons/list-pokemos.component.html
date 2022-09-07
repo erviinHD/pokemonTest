@@ -9,13 +9,25 @@
 </section>
 
 <section *ngIf="isOpen" class="createSeccion">
-    <h3>Nuevo Pokemon</h3>
+    <h3 class="center">Nuevo Pokemon</h3>
+    <br>
     <form [formGroup]="formPokemon">
-        <input type="text" name="Nombre" id="" formControlName="name">
-        <input type="text" name="Imagen" id="" formControlName="image">
-        <input type="range" name="Ataque" id="myinput" min="0" max="100" formControlName="attack">
-        <input type="range" name="Defensa" id="" min="0" max="100" formControlName="defense">
+        <div class="textCenter">
+            <label for="" class="pr-s">Nombre: </label>
+            <input autocomplete="off" class="input" formControlName="name" name="Nombre" type="text"
+                [ngClass]="{'errorInput':inputIsValid('name')}">
+            <label for="" class="pr-md pl-lg">Ataque:</label>
+            0<input type="range" name="Ataque" id="myinput" min="0" max="100" formControlName="attack">100
+        </div>
 
+        <div class="textCenter">
+            <label for="" class="pr-md">Imagen:</label>
+            <input autocomplete="off" class="input" formControlName="image" name="Imagen" type="text"
+                [ngClass]="{'errorInput':inputIsValid('image')}">
+            <label for="" class="pr-s pl-lg">Defensa:</label>
+            0<input type="range" name="Defensa" id="" min="0" max="100" formControlName="defense">100
+        </div>
+        <br>
         <div class="center">
             <app-buttons styleButton="primary-button" icon="save" name="Agregar" (funtionButton)="createPokemon()">
             </app-buttons>

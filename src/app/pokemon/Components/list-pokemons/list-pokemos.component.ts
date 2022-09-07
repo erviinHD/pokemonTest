@@ -82,13 +82,18 @@ export class ListPokemosComponent implements OnInit {
           })
         this.subscriptions.push(subPokemonPost)
       })
-      
+
     }
   }
 
   clearForm() {
     this.isOpen = !this.isOpen
     this.formPokemon.reset()
+  }
+
+  inputIsValid(field: string) {
+    return this.formPokemon.controls[field].errors &&
+      this.formPokemon.controls[field].touched
   }
 
   ngOnDestroy() {

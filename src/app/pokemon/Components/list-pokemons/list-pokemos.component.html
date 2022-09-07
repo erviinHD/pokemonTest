@@ -4,8 +4,8 @@
 
 <section>
     <input class="inputSerch" type="search" placeholder="Buscar" [(ngModel)]="pokemonNameSearch" style="float: left;">
-    <app-buttons styleButton="primary-button" icon="add" name="Nuevo" (funtionButton)="clearForm()"
-        class="centerRight"></app-buttons>
+    <app-buttons styleButton="primary-button" icon="add" name="Nuevo" (funtionButton)="clearForm()" class="centerRight">
+    </app-buttons>
 </section>
 
 <section *ngIf="isOpen" class="createSeccion">
@@ -30,9 +30,11 @@
         </div>
         <br>
         <div class="center">
-            <app-buttons *ngIf="!isEdit" styleButton="primary-button" icon="save" name="Agregar" (funtionButton)="createPokemon()">
+            <app-buttons *ngIf="!isEdit" styleButton="primary-button" icon="save" name="Agregar"
+                (funtionButton)="createPokemon()">
             </app-buttons>
-            <app-buttons *ngIf="isEdit" styleButton="primary-button" icon="save" name="Actualizar" (funtionButton)="updatePokemon()">
+            <app-buttons *ngIf="isEdit" styleButton="primary-button" icon="save" name="Actualizar"
+                (funtionButton)="updatePokemon()">
             </app-buttons>
             &nbsp; &nbsp;
             <app-buttons styleButton="primary-dark" icon="close" name="Cerrar" (funtionButton)="clearForm()">
@@ -51,7 +53,7 @@
             <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="pokemons.length > 0">
         <tr *ngFor="let pokemon of pokemons |searchPokemon:pokemonNameSearch">
             <td>{{pokemon.name}}</td>
             <td>
@@ -74,3 +76,5 @@
         </tr>
     </tbody>
 </table>
+
+<app-loading *ngIf="pokemons.length == 0"></app-loading>

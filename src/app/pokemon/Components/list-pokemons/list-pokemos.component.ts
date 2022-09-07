@@ -38,8 +38,8 @@ export class ListPokemosComponent implements OnInit {
     this.formPokemon = this.fb.group({
       name: ['', Validators.required],
       image: ['', Validators.required],
-      attack: [0, Validators.required],
-      defense: [0, Validators.required],
+      attack: [50, Validators.required],
+      defense: [50, Validators.required],
       hp: 100,
       type: "normal",
       idAuthor: 1
@@ -112,7 +112,6 @@ export class ListPokemosComponent implements OnInit {
           })
         this.subscriptions.push(subPokemonPost)
       })
-
     }
   }
 
@@ -135,7 +134,13 @@ export class ListPokemosComponent implements OnInit {
   clearForm() {
     this.isOpen = !this.isOpen
     this.isEdit = false
-    this.formPokemon.reset()
+    this.formPokemon.controls['name'].reset();
+    this.formPokemon.controls['image'].reset();
+    this.formPokemon.controls['attack'].setValue(50);
+    this.formPokemon.controls['defense'].setValue(50);
+    this.formPokemon.controls['hp'].setValue(100);
+    this.formPokemon.controls['type'].setValue("normal");
+    this.formPokemon.controls['idAuthor'].setValue(1);
   }
 
   inputIsValid(field: string) {

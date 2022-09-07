@@ -4,12 +4,13 @@
 
 <section>
     <input class="inputSerch" type="search" placeholder="Buscar" [(ngModel)]="pokemonNameSearch" style="float: left;">
-    <app-buttons styleButton="primary-button" icon="add" name="Nuevo" (funtionButton)="isOpen = !isOpen"
+    <app-buttons styleButton="primary-button" icon="add" name="Nuevo" (funtionButton)="clearForm()"
         class="centerRight"></app-buttons>
 </section>
 
 <section *ngIf="isOpen" class="createSeccion">
-    <h3 class="center">Nuevo Pokemon</h3>
+    <h3 class="center" *ngIf="!isEdit">Nuevo Pokemon</h3>
+    <h3 class="center" *ngIf="isEdit">Editar Pokemon</h3>
     <br>
     <form [formGroup]="formPokemon">
         <div class="textCenter">
@@ -29,7 +30,9 @@
         </div>
         <br>
         <div class="center">
-            <app-buttons styleButton="primary-button" icon="save" name="Agregar" (funtionButton)="createPokemon()">
+            <app-buttons *ngIf="!isEdit" styleButton="primary-button" icon="save" name="Agregar" (funtionButton)="createPokemon()">
+            </app-buttons>
+            <app-buttons *ngIf="isEdit" styleButton="primary-button" icon="save" name="Actualizar" (funtionButton)="updatePokemon()">
             </app-buttons>
             &nbsp; &nbsp;
             <app-buttons styleButton="primary-dark" icon="close" name="Cerrar" (funtionButton)="clearForm()">
@@ -60,7 +63,7 @@
             <td>{{pokemon.defense}}</td>
             <td>
                 <div class="center">
-                    <span class="material-icons">
+                    <span class="material-icons" (click)="getPokemonById(pokemon.id)">
                         drive_file_rename_outline
                     </span>
                     <span class="material-icons" (click)="deletePokemon(pokemon)">

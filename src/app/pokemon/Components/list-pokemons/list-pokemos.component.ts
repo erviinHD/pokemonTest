@@ -4,7 +4,7 @@ import { Pokemon } from '../../Interfaces/pokemon';
 import { Subscription } from 'rxjs';
 
 import { PokemonService } from '../../services/pokemon.service';
-import { AlertsService } from '../../Services/alerts.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-pokemos',
@@ -17,11 +17,30 @@ export class ListPokemosComponent implements OnInit {
   subscriptions: Subscription[] = [];
 
   pokemonNameSearch: string = ''
+  isOpen: boolean = false;
 
-  constructor(private _pokemon: PokemonService, private _alerts: AlertsService) { }
+  formPokemon: FormGroup;
+
+  constructor(
+    private _pokemon: PokemonService,
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
+    this.initForm()
+  }
+
+  initForm() {
+    this.formPokemon = this.fb.group({
+      name: ['', Validators.required],
+      image: ['', Validators.required],
+      attack: [0, Validators.required],
+      defense: [0, Validators.required],
+      hp: 100,
+      type: "normal",
+      idAuthor: 1
+    });
   }
 
   async loadData() {
@@ -40,24 +59,36 @@ export class ListPokemosComponent implements OnInit {
   }
 
   deletePokemon(pokemon: Pokemon) {
-    const alert = this._alerts.sweeAletDeleteGeneric(
-      'El Pokemón: '.concat(pokemon.name)
-    );
+    const subPokemonDelete = this._pokemon
+      .deletePokemon(pokemon.id.toString())
+      .subscribe({
+        next: () => {
+          this.loadData()
+        },
+        error: (err) => {
+        }
+      });
+    this.subscriptions.push(subPokemonDelete);
+  }
 
-    alert.then((result) => {
-      if (result.value) {
-        const subPokemonDelete = this._pokemon
-          .deletePokemon(pokemon.id.toString())
-          .subscribe({
-            next: () => {
-              this.loadData()
-            },
-            error: (err) => {
-            }
-          });
-        this.subscriptions.push(subPokemonDelete);
-      }
-    })
+  createPokemon() {
+    if (this.formPokemon.valid) {
+      return new Promise((resolve, rejects) => {
+        const subPokemonPost = this._pokemon.postPokemon(this.formPokemon.value)
+          .subscribe((resp) => {
+            resolve(resp)
+            this.loadData()
+            this.clearForm()
+          })
+        this.subscriptions.push(subPokemonPost)
+      })
+      
+    }
+  }
+
+  clearForm() {
+    this.isOpen = !this.isOpen
+    this.formPokemon.reset()
   }
 
   ngOnDestroy() {

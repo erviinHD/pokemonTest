@@ -17,6 +17,10 @@ export class PokemonService {
     return this.http.get<Pokemon[]>(`${this.URL_API}/?idAuthor=1`);
   }
 
+  postPokemon(pokemon: Pokemon): Observable<Pokemon> {
+    return this.http.post<Pokemon>(`${this.URL_API}/?idAuthor=1`, pokemon);
+  }
+
   deletePokemon(idPokemon: string): Observable<any> {
     return this.http.delete<any>(`${this.URL_API}/${idPokemon}`);
   }

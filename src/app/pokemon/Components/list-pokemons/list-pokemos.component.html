@@ -3,7 +3,27 @@
 </nav>
 
 <section>
-    <input class="inputSerch" type="search" placeholder="Buscar" [(ngModel)]="pokemonNameSearch">
+    <input class="inputSerch" type="search" placeholder="Buscar" [(ngModel)]="pokemonNameSearch" style="float: left;">
+    <app-buttons styleButton="primary-button" icon="add" name="Nuevo" (funtionButton)="isOpen = !isOpen"
+        class="centerRight"></app-buttons>
+</section>
+
+<section *ngIf="isOpen" class="createSeccion">
+    <h3>Nuevo Pokemon</h3>
+    <form [formGroup]="formPokemon">
+        <input type="text" name="Nombre" id="" formControlName="name">
+        <input type="text" name="Imagen" id="" formControlName="image">
+        <input type="range" name="Ataque" id="myinput" min="0" max="100" formControlName="attack">
+        <input type="range" name="Defensa" id="" min="0" max="100" formControlName="defense">
+
+        <div class="center">
+            <app-buttons styleButton="primary-button" icon="save" name="Agregar" (funtionButton)="createPokemon()">
+            </app-buttons>
+            &nbsp; &nbsp;
+            <app-buttons styleButton="primary-dark" icon="close" name="Cerrar" (funtionButton)="clearForm()">
+            </app-buttons>
+        </div>
+    </form>
 </section>
 
 <table class="indexTable">

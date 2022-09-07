@@ -4,9 +4,10 @@ import { ListPokemosComponent } from './list-pokemons/list-pokemos.component';
 import { PipesModule } from '../Pipes/pipes.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonsComponent } from './buttons/buttons.component';
 
 @NgModule({
-  declarations: [ListPokemosComponent],
+  declarations: [ListPokemosComponent, ButtonsComponent],
   imports: [
     CommonModule,
     PipesModule,

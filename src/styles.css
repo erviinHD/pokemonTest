@@ -15,3 +15,45 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.centerRight {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+
+  .centerLeft {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+  
+
+  /* Theme app*/
+  .primary-button{
+    background-color: rgb(96, 19, 219);
+    border: 1px solid rgb(96, 19, 219);
+    color: white;
+    font-size: 16px;
+    padding: 8px 15px 8px 15px;
+    border-radius: 4px;
+}
+
+.primary-button:hover{
+    background-color: rgb(72, 17, 160);
+    cursor: pointer;
+}
+
+.primary-dark{
+    background-color: rgb(135, 134, 136);
+    border: 1px solid rgb(135, 134, 136);
+    color: white;
+    font-size: 16px;
+    padding: 8px 15px 8px 15px;
+    border-radius: 4px;
+}
+
+.primary-dark:hover{
+    background-color: rgb(101, 100, 102,6);
+    cursor: pointer;
+}
